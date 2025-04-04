@@ -10,3 +10,6 @@
 [¿Qué es la regresión de mínimos cuadrados parciales?](https://support.minitab.com/es-mx/minitab/help-and-how-to/statistical-modeling/regression/supporting-topics/partial-least-squares-regression/what-is-partial-least-squares-regression/)
 
 [Regresión de mínimos cuadrados parciales](https://estadisticaitm.github.io/pls.html) este es el mas importante
+
+
+dataset: [Medical Cost Personal Datasets](https://www.kaggle.com/datasets/mirichoi0218/insurance)
