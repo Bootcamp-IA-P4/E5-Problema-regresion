@@ -116,6 +116,7 @@ plt.show()
 5. Universidad Nacional de Colombia. (2016). *Análisis de regresión PLS*. https://repositorio.unal.edu.co/handle/unal/57110
 
 
+--------------------
 
    No copiar esto! Solo para uso de busqueda de informacion
 [PLS](https://ve.scielo.org/scielo.php?script=sci_arttext&pid=S0254-07702003000300006)
