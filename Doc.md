@@ -13,7 +13,14 @@ La regresión por Mínimos Cuadrados Parciales (PLS, por sus siglas en inglés) 
 
 - Cuando existe **multicolinealidad** entre las variables predictoras.
 - Cuando el número de variables es **muy alto**.
-- En contextos como la química, biología, economía y ciencias de datos.
+- En contextos como la química, biología, economía y ciencias de datos:
+  * Química (para predecir propiedades de mezclas)
+
+  * Marketing (para predecir comportamiento del consumidor)
+
+   * Bioinformática (con muchos genes y pocas muestras)
+     
+   * Machine learning cuando hay pocos datos y muchas columnas
 
 ---
 
