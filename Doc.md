@@ -1,11 +1,16 @@
 # Regresión por Mínimos Cuadrados Parciales (PLS)
 
-Este documento es una introducción clara y sencilla al algoritmo de **Regresión por Mínimos Cuadrados Parciales (PLS)**.
----
 
+Este documento es una introducción clara y sencilla al algoritmo de **Regresión por Mínimos Cuadrados Parciales (PLS)**.  
+---  
+&nbsp;
+
+---
 ## 📄 Introducción
 
-La regresión por Mínimos Cuadrados Parciales (PLS, por sus siglas en inglés) es una técnica estadística que combina la reducción de dimensionalidad con la regresión. Se utiliza especialmente cuando hay muchas variables independientes que están altamente correlacionadas o cuando hay más variables que observaciones.
+La regresión por Mínimos Cuadrados Parciales (PLS, por sus siglas en inglés) es una técnica estadística que combina la reducción de dimensionalidad con la regresión. Se utiliza especialmente cuando hay muchas variables independientes que están altamente correlacionadas o cuando hay más variables que observaciones.  
+  
+&nbsp;
 
 ---
 
@@ -22,11 +27,14 @@ La regresión por Mínimos Cuadrados Parciales (PLS, por sus siglas en inglés) 
      
    * Machine learning cuando hay pocos datos y muchas columnas
 
----
+&nbsp;
 
+
+---
 ## 🔢 Fundamento Matemático Básico
 
 PLS transforma las variables originales \( X \) e \( Y \) en nuevos componentes latentes que explican la mayor parte de su covarianza.
+
 
 $$
 X = T P^T + E
@@ -36,14 +44,18 @@ Y = U Q^T + F
 $$
 
 
+
 - \( T \), \( U \): Componentes latentes (scores)
 - \( P \), \( Q \): Cargas (loadings)
 - \( E \), \( F \): Residuos
 
+
 PLS busca encontrar componentes que **maximicen la covarianza entre X y Y**.
 
----
+&nbsp;
 
+
+---
 ## 🚀 Parámetros Principales
 
 | Parámetro        | Descripción                                                  |
@@ -53,6 +65,8 @@ PLS busca encontrar componentes que **maximicen la covarianza entre X y Y**.
 | `algorithm`      | Método de solución: 'nipals' (por defecto) o 'svd'.          |
 | `max_iter`       | Máximo número de iteraciones.                              |
 | `tol`            | Tolerancia para convergencia.                               |
+
+&nbsp;
 
 ---
 
@@ -127,8 +141,11 @@ plt.show()
 
 ```
 
----
 
+
+&nbsp;
+
+---
 
 ## ✅ Ventajas y ❌ Desventajas
 
@@ -141,6 +158,10 @@ plt.show()
 - Menor interpretabilidad que modelos tradicionales.
 - Elegir el número óptimo de componentes puede requerir validación cruzada.
 
+&nbsp;
+
+
+
 ---
 
 ## 📚 Bibliografía
@@ -150,9 +171,6 @@ plt.show()
 3. Vega Vilca, R. (2018). *Introducción a PLS*. https://www.uprm.edu/wp-content/uploads/sites/171/2018/12/vegavilca.pdf  
 4. SCIELO Venezuela. (2003). *Comparación de regresiones multivariadas*. https://ve.scielo.org/ 
 5. Universidad Nacional de Colombia. (2016). *Análisis de regresión PLS*. https://repositorio.unal.edu.co/handle/unal/57110
-
-
---------------------
 
    No copiar esto! Solo para uso de busqueda de informacion
 [PLS](https://ve.scielo.org/scielo.php?script=sci_arttext&pid=S0254-07702003000300006)
