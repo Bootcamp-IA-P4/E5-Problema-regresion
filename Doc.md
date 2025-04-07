@@ -58,41 +58,74 @@ PLS busca encontrar componentes que **maximicen la covarianza entre X y Y**.
 ```python
 import numpy as np
 import pandas as pd
-from sklearn.cross_decomposition import PLSRegression
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import mean_squared_error
 import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
 
-# Datos simulados
-np.random.seed(42)
-X = np.random.normal(size=(100, 10))
-y = X[:, 0]*3 + X[:, 1]*-2 + np.random.normal(size=100)
-y = y.reshape(-1, 1)
+# Load the dataset
+data = pd.read_csv('animal_symptoms.csv')
 
-# Dividir datos
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+# Question 1: What proportion of cases are considered dangerous?
+dangerous_cases = data[data['mortality_rate'] > 0.5]
+dangerous_proportion = len(dangerous_cases) / len(data)
+print(f'Proportion of dangerous cases: {dangerous_proportion:.2f}')
 
-# Crear modelo
-pls = PLSRegression(n_components=2)
-pls.fit(X_train, y_train)
+# Question 2: What are the most common symptoms?
+symptom_columns = ['symptom_1', 'symptom_2', 'symptom_3']
+common_symptoms = data[symptom_columns].apply(pd.Series.value_counts).fillna(0)
+print('Most common symptoms:\n', common_symptoms)
 
-# Predicción
-y_pred = pls.predict(X_test)
+# Question 3: Which species are most affected by these symptoms?
+species_symptoms = data.groupby('species')[symptom_columns].sum()
+print('Species most affected by symptoms:\n', species_symptoms)
 
-# Evaluación
-mse = mean_squared_error(y_test, y_pred)
-print(f"Error cuadrático medio: {mse:.2f}")
+# Question 4: What symptoms do animals that have died present?
+deceased_animals = data[data['mortality_rate'] == 1]  # assuming 1 means deceased
+deceased_symptoms = deceased_animals[symptom_columns].apply(pd.Series.value_counts).fillna(0)
+print('Symptoms in deceased animals:\n', deceased_symptoms)
 
-# Visualización
+# Question 5: Can we find a pattern of symptoms associated with dangerous cases?
+# Let's model this with linear regression to see the relationship
+X = data[symptom_columns].values
+y = data['mortality_rate'].values
+
+# Train-test split for linear regression model
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Linear regression model
+regressor = LinearRegression()
+regressor.fit(X_train, y_train)
+
+# Coefficients of the regression (important for identifying the pattern)
+print(f'Regression coefficients for each symptom: {regressor.coef_}')
+
+# Predictions for test set
+y_pred = regressor.predict(X_test)
+
+# Mean squared error for evaluation
+mse = np.mean((y_pred - y_test) ** 2)
+print(f'Mean Squared Error: {mse:.2f}')
+
+# Visualize the actual vs predicted mortality rate
 plt.scatter(y_test, y_pred)
-plt.xlabel("Valores Reales")
-plt.ylabel("Predicciones")
-plt.title("PLS: Predicciones vs Reales")
-plt.grid(True)
+plt.xlabel('Actual Mortality Rate')
+plt.ylabel('Predicted Mortality Rate')
+plt.title('Actual vs Predicted Mortality Rate')
 plt.show()
+
+# Visualize the residuals
+residuals = y_test - y_pred
+plt.scatter(y_pred, residuals)
+plt.axhline(y=0, color='r', linestyle='--')
+plt.xlabel('Predicted Mortality Rate')
+plt.ylabel('Residuals')
+plt.title('Residuals Plot')
+plt.show()
+
 ```
 
 ---
+
 
 ## ✅ Ventajas y ❌ Desventajas
 
