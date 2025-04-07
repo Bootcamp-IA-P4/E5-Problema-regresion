@@ -29,8 +29,12 @@ La regresión por Mínimos Cuadrados Parciales (PLS, por sus siglas en inglés) 
 PLS transforma las variables originales \( X \) e \( Y \) en nuevos componentes latentes que explican la mayor parte de su covarianza.
 
 ```latex
-X = T P^T + E 
+$$
+X = T P^T + E
+$$ 
+$$
 Y = U Q^T + F
+$$
 ```
 
 - \( T \), \( U \): Componentes latentes (scores)
