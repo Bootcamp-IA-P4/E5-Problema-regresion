@@ -1,6 +1,6 @@
-# Módelo predicitivo para Wagen SA
+# Modelo predicitivo para Wagen SA
 
-## Como usar PetGrubber
+## Como usar nuestro modelo regresión lineal
 
 > [!WARNING]
 > este programa esta creado con la version de python3.10
