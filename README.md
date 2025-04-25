@@ -54,40 +54,38 @@ Construir un **modelo predictivo** que estime el precio de un vehículo usado en
 
 > **Requisito:** Python ≥ 3.10
 
-```bash
 # 1️⃣ Clonar repo
+```textplain
 git clone https://github.com/Bootcamp-IA-P4/E5-Problema-regresion.git
 cd E5-Problema-regresion
-
+```
 # 2️⃣ Crear y activar entorno virtual
+``` textplain
 python3.10 -m venv .venv
-source .venv/bin/activate   # macOS/Linux
-# .venv\Scripts\activate    # Windows
+```
+ macOS/Linux
+```textplain
+source .venv/bin/activate
+``` 
+ Windows
+ ```
+# .venv\Scripts\activateç
+```   
 
 # 3️⃣ Instalar dependencias
+```textplain
 pip install -r requirements.txt
+```
 
 > [!TIP]
 > Con `pip list` puedes visualizar todas las dependencias descargadas.
 
 # 4️⃣ Ejecutar dashboard
-streamlit run app.py
-
-# Modelo predicitivo para Wagen SA
-
-## 📌 Descripción General
-
-Este proyecto tiene como objetivo desarrollar un sistema de predicción de precios para vehículos usados utilizando técnicas de Machine Learning. 
-El enfoque principal es la **regresión lineal** y su variante **Ridge**, con comparaciones frente a modelos más complejos como **Random Forest**. 
-El modelo fue entrenado con datos reales de publicaciones de autos usados en Estados Unidos.
-
----
-
-### 5️⃣ Ejecuta streamlit 
 ```textplain
 streamlit run app.py
 ```
----
+
+----
 
 ## 💂 Estructura del Proyecto
 
@@ -114,7 +112,7 @@ streamlit run app.py
 
 ## 📊 Dataset
 
-**Fuente:** Datos extraídos de publicaciones de autos usados en línea (fuente no especificada).
+Origen: Publicaciones reales de autos usados en línea (EE.UU.).
 
 **Características Principales del Dataset:**
 - Año de fabricación (`year`)
@@ -144,15 +142,17 @@ Realizado en el notebook `EDA.ipynb`, donde se incluyen:
 
 ---
 
-## ⚙️ Preprocesamiento
+⚙️ Preprocesamiento
 
-Pasos clave:
+1. Eliminación de registros con valores faltantes críticos
 
-- Eliminación de registros con valores faltantes críticos
-- Conversión de variables categóricas a dummies (One-Hot Encoding)
-- Normalización de variables numéricas
-- Balanceo de clases para modelos no lineales (en Random Forest)
-- Guardado del dataset limpio en `vehicles_prep.csv`
+2. One-Hot Encoding de variables categóricas
+
+3. Normalización de variables numéricas
+
+4. Balanceo para Random Forest
+
+5. Exportación a vehicles_prep.csv
 
 ---
 
@@ -167,11 +167,21 @@ Se entrenaron y evaluaron múltiples modelos:
 - **Random Forest**
   - Uso como modelo comparativo no lineal.
   - Mejor desempeño general, almacenado en `rf_balanceado_refinado.pkl`.
+    
+Modelo | Regularización | Validación | Hiperparámetros
+Regresión Lineal | – | K-Fold (k=5) | –
+Ridge | L2 | GridSearchCV | alpha ∈ [0.1, 1, 10, 100]
+Random Forest | – | GridSearchCV | n_estimators, max_depth, min_samples_split
 
 ### 📏 Métricas de Evaluación
 - RMSE (Root Mean Squared Error)
 - MAE (Mean Absolute Error)
 - R² (Coeficiente de Determinación)
+
+Modelo | R² Score | RMSE | MAE
+Regresión Lineal | 0.68 | 3 500 $ | 2 500 $
+Ridge | 0.70 | 3 400 $ | 2 400 $
+Random Forest | 0.85 | 2 200 $ | 1 700 $
 
 ### 📈 Validación
 - Validación cruzada K-Fold
