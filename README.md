@@ -167,20 +167,22 @@ Se entrenaron y evaluaron múltiples modelos:
   - Uso como modelo comparativo no lineal.
   - Mejor desempeño general, almacenado en `rf_balanceado_refinado.pkl`.
     
-Modelo | Regularización | Validación | Hiperparámetros
-Regresión Lineal | – | K-Fold (k=5) | –
-Ridge | L2 | GridSearchCV | alpha ∈ [0.1, 1, 10, 100]
-Random Forest | – | GridSearchCV | n_estimators, max_depth, min_samples_split
+| Modelo | Regularización | Validación | Hiperparámetros |
+|----------------|----------|---------|---------|
+| Regresión Lineal | – | K-Fold (k=5) | – |
+| Ridge | L2 | GridSearchCV | alpha ∈ [0.1, 1, 10, 100] |
+| Random Forest | – | GridSearchCV | n_estimators, max_depth, min_samples_split |
 
 ### 📏 Métricas de Evaluación
 - RMSE (Root Mean Squared Error)
 - MAE (Mean Absolute Error)
 - R² (Coeficiente de Determinación)
 
-Modelo | R² Score | RMSE | MAE
-Regresión Lineal | 0.68 | 3 500 $ | 2 500 $
-Ridge | 0.70 | 3 400 $ | 2 400 $
-Random Forest | 0.85 | 2 200 $ | 1 700 $
+| Modelo | R² Score | RMSE | MAE |
+|-----------|----------|---------|---------|
+| Regresión Lineal | 0.68 | 3 500 $ | 2 500 $ |
+| Ridge | 0.70 | 3 400 $ | 2 400 $ |
+| Random Forest | 0.85 | 2 200 $ | 1 700 $ |
 
 ### 📈 Validación
 - Validación cruzada K-Fold
