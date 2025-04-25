@@ -16,15 +16,15 @@
 2. [✨ Características Clave](#-características-clave)  
 3. [🛠️ Instalación & Ejecución](#️-instalación--ejecución)  
 4. [📂 Estructura del Repositorio](#-estructura-del-repositorio)  
-5. [📦 Datos](#-datos)  
+5. [📊 Dataset](#-dataset)  
 6. [🔍 Análisis Exploratorio (EDA)](#-análisis-exploratorio-eda)  
 7. [⚙️ Preprocesamiento](#️-preprocesamiento)  
 8. [🤖 Modelado](#-modelado)  
-9. [🔮 Resultados](#-resultados)  
-10. [🚧 Trabajo Futuro](#-trabajo-futuro)  
-11. [🤝 Contribuir](#-contribuir)  
-12. [📄 Licencia](#-licencia)  
-13. [✉️ Contacto](#️-contacto)  
+9. [🔮 Resultados](#-resultados)
+10. [📌 Conclusiones](#-conclusiones)  
+11. [🚧 Trabajo Futuro](#-trabajo-futuro)  
+12. [🤝 Contribuir](#-contribuir)    
+13. [🤝 Contribución](#️-contribición)  
 
 ---
 
@@ -54,12 +54,12 @@ Construir un **modelo predictivo** que estime el precio de un vehículo usado en
 
 > **Requisito:** Python ≥ 3.10
 
-# 1️⃣ Clonar repo
+### 1️⃣ Clonar repo
 ```textplain
 git clone https://github.com/Bootcamp-IA-P4/E5-Problema-regresion.git
 cd E5-Problema-regresion
 ```
-# 2️⃣ Crear y activar entorno virtual
+### 2️⃣ Crear y activar entorno virtual
 ``` textplain
 python3.10 -m venv .venv
 ```
@@ -72,7 +72,7 @@ source .venv/bin/activate
 # .venv\Scripts\activateç
 ```   
 
-# 3️⃣ Instalar dependencias
+### 3️⃣ Instalar dependencias
 ```textplain
 pip install -r requirements.txt
 ```
@@ -80,15 +80,14 @@ pip install -r requirements.txt
 > [!TIP]
 > Con `pip list` puedes visualizar todas las dependencias descargadas.
 
-# 4️⃣ Ejecutar dashboard
+### 4️⃣ Ejecutar dashboard
 ```textplain
 streamlit run app.py
 ```
 
 ----
 
-## 💂 Estructura del Proyecto
-
+## 📂 Estructura del Repositorio
 ```
 ├── Datas
 |──── Vehicles_prep.csv                 # Dataset preprocesado y limpio
@@ -142,7 +141,7 @@ Realizado en el notebook `EDA.ipynb`, donde se incluyen:
 
 ---
 
-⚙️ Preprocesamiento
+## ⚙️ Preprocesamiento
 
 1. Eliminación de registros con valores faltantes críticos
 
@@ -156,7 +155,7 @@ Realizado en el notebook `EDA.ipynb`, donde se incluyen:
 
 ---
 
-## 🧐 Modelado
+## 🤖 Modelado
 
 Se entrenaron y evaluaron múltiples modelos:
 
@@ -210,6 +209,7 @@ El archivo `options.json` contiene las posibles opciones categóricas para facil
 - `cylinders`: número de cilindros
 - `states`: estados abreviados de EE.UU.
 
+---
 
 ## 📌 Conclusiones
 
@@ -217,3 +217,36 @@ El archivo `options.json` contiene las posibles opciones categóricas para facil
 - La combinación de análisis exploratorio y regularización (Ridge) permite mejorar el desempeño y reducir el overfitting.
 - El uso de modelos más complejos como Random Forest mejora notablemente las métricas pero a costa de interpretabilidad.
 
+## 🚧 Trabajo Futuro
+Integrar features de texto (descripciones de anuncios)
+
+Despliegue en nube (Docker + AWS/GCP)
+
+Probar XGBoost y LightGBM
+
+Añadir AutoML para selección automática de modelo
+
+---
+
+## 🤝 Contribución  
+
+¡Las contribuciones son bienvenidas! Para contribuir:  
+
+1. Haz un fork del repositorio.
+   
+3. Crea una nueva rama:
+    
+   ```sh
+   git checkout -b feature/nueva-funcionalidad
+   ```
+   
+4. Realiza tus cambios y haz commit:
+   
+  ```sh
+git commit -m "Añadir nueva funcionalidad"
+```
+
+4. Envía un pull request 🚀.
+   
+---
+## 🚀 ¡Gracias por usar ! Si tienes preguntas, crea un issue en el repositorio o contáctanos.
