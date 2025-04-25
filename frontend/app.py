@@ -2,82 +2,69 @@ import streamlit as st
 import pandas as pd
 import joblib
 import json
-import pickle
 import numpy as np
 
 # Configuración de la página
-st.title("🚘Bienvenido a Wagen SA")
-st.subheader("🔮Predice el precio de tu vehículo usado")
-st.markdown(
-    """
-    Esta aplicación te permite predecir el precio de un vehículo usado basado en sus características.
-    Selecciona las opciones a continuación y haz clic en "Predecir precio".
-    """
-)
+st.title("🚘 Bienvenido a Wagen SA")
+st.subheader("🔮 Predice el precio de tu vehículo usado")
 
-# Cargar modelo (con cache para mejor performance)
+st.markdown("""
+Esta aplicación te permite predecir el precio de un vehículo usado basado en sus características.
+Selecciona las opciones a continuación y haz clic en "Predecir precio".
+""")
+
+# Cargar modelo (asegúrate que sea el modelo con Pipeline)
 @st.cache_resource
 def load_model():
-    with open('rf_balanceado_refinado.pkl', 'rb') as f:
-        return pickle.load(f)
+    return joblib.load("modelo_pipeline.pkl") 
 
-model_data = load_model()
-model = model_data['model']
+model = load_model()
 
-# Función de post-procesamiento (opcional)
+# Función de postprocesamiento (si usaste log1p al entrenar)
 def post_process(prediction):
-    # Ejemplo: redondear precio y formatear como moneda
-    precio_redondeado = round(prediction, 2)
+    precio_real = np.expm1(prediction)  # destransformar predicción logarítmica
     return {
-        "precio_estimado": f"${precio_redondeado:,.2f}",
-        "rango": (
-            f"${round(prediction*0.95):,} - ${round(prediction*1.05):,}"
-            if prediction > 10000 
-            else "Estimación precisa"
-        )
+        "precio_estimado": f"${precio_real:,.2f}",
+        "rango": f"${round(precio_real * 0.95):,} - ${round(precio_real * 1.05):,}"
     }
-# Cargar nuestro .json
+
+# Cargar opciones desde JSON
 with open("options.json", "r") as f:
     options = json.load(f)
-
-# Cargar modelo
-#model = joblib.load("rf_balanceado_refinado.pkl")
-
 
 # Interfaz de usuario
 brand = st.selectbox("Marca", options["brands"])
 color = st.selectbox("Color", options["colors"])
 cylinders = st.selectbox("Cilindros", options["cylinders"])
-conditions = st.selectbox("Estado", options["conditions"])
+conditions = st.selectbox("Condición", options["conditions"])
+state = st.selectbox("Estado (US)", options["states"])
+year = st.slider("Año", 1980, 2025, 2015)
+odometer = st.number_input("Odómetro (millas)", min_value=0, value=50000)
 
+# Crear input para predicción
+input_data = pd.DataFrame([{
+    "brand": brand,
+    "color": color,
+    "cylinders": cylinders,
+    "conditions": conditions,
+    "state": state,
+    "year": year,
+    "odometer": odometer
+}])
 
 # Predicción
 if st.button("Predecir precio"):
-     # Crear DataFrame con el formato correcto
-    input_data = pd.DataFrame({
-        "brand": [brand],
-        "color": [color],
-        "cylinders": [cylinders],
-        "conditions": [conditions],
-    })
     try:
-        # Preprocesamiento y predicción automáticos
-        prediction = model.predict(input_data)[0]
-        
-        # Post-procesamiento
-        result = post_process(prediction)
-        
-        # Mostrar resultados
-        st.success("Predicción completada!")
-        
-        st.metric("Precio Estimado", result['precio_estimado'])
+        pred_log = model.predict(input_data)[0]
+        result = post_process(pred_log)
+
+        st.success("✅ Predicción completada!")
+        st.metric("Precio estimado", result["precio_estimado"])
         st.caption(f"Rango probable: {result['rango']}")
-        
-        # Detalles técnicos (opcional)
-        with st.expander("Detalles técnicos"):
-            st.write("Valor bruto estimado:", prediction)
-            st.write("Características usadas:", input_data.to_dict())
-    
+
+        with st.expander("🔍 Detalles técnicos"):
+            st.write("Entrada:", input_data)
+            st.write("Predicción (log):", pred_log)
+
     except Exception as e:
-        st.error(f"Error en la predicción: {str(e)}")
-    
+        st.error(f"❌ Error al predecir: {e}")
