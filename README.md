@@ -108,6 +108,50 @@ streamlit run app.py
 ```
 
 ---
+## Díagrama de arquitectura
+
+```
++-------------------+          +-------------------+
+|                   |          |                   |
+|  Fuente de Datos  |  ---->   |  EDA y Limpieza   |
+|  (CSV: vehicles*) |          |  (EDA.ipynb)      |
+|                   |          |                   |
++-------------------+          +-------------------+
+                                     |
+                                     v
+                          +-------------------------+
+                          |                         |
+                          |  Preprocesamiento       |
+                          |  - Imputación de datos  |
+                          |  - Escalado             |
+                          |  - Codificación (OneHot)|
+                          |                         |
+                          +-------------------------+
+                                     |
+                                     v
+                          +-------------------------+
+                          |                         |
+                          |  División Train/Test    |
+                          |                         |
+                          +-------------------------+
+                                     |
+                                     v
++-------------------+     +-------------------------+     +--------------------------+
+|                   |     |                         |     |                          |
+|  Modelos ML       |<----|  Pipeline de Regresión  |---->|  Métricas de Evaluación  |
+|  - Ridge          |     |  (Ridge.ipynb)          |     |  - R², RMSE, etc.        |
+|  - Comparativos   |     +-------------------------+     +--------------------------+
+|    (otros futuros)|            
++-------------------+
+                                     |
+                                     v
+                          +--------------------------+
+                          |                          |
+                          |   Predicción Web/App     |
+                          |   (Interfaz de usuario)  |
+                          |                          |
+                          +--------------------------+
+```
 
 ## 📊 Dataset
 
